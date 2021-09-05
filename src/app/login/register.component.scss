@@ -1,0 +1,50 @@
+.login-container {
+  background-color: gainsboro;
+  display: inline-block;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 400px;
+  height: 300px;
+  margin: auto;
+  border-radius: 5px;
+  border: 4px solid gray;
+  box-shadow: 0px 1px 15px 0px grey;
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    padding: 5px 40px;
+    flex: 1;
+    position: relative;
+  }
+  .login-header {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-top: 20px;
+  }
+  .submit-button {
+    margin: auto;
+    margin-top: 10px;
+    padding: 0 80px;
+    justify-content: center;
+  }
+
+  .error {
+    font-size: 8px;
+    text-align: center;
+    color: #b71c1c;;
+  }
+}
+
+.tooltip-red {
+  background: #b71c1c;
+}
+@media only screen and (max-width: 600px) {
+  .login-container {
+    width: 95%;
+    height: 50%;
+  }
+}

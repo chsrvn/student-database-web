@@ -1,0 +1,76 @@
+<div class="login-container">
+  <div class="login-header"><h1>Expense Manager</h1></div>
+  <form
+    class="login-form"
+    [formGroup]="registerForm"
+    (ngSubmit)="registerUser()"
+  >
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Username*" formControlName="username" />
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input
+        matInput
+        placeholder="Password*"
+        type="password"
+        formControlName="password"
+      />
+      <mat-icon
+        style="color: red"
+        *ngIf="
+          registerForm?.invalid &&
+          registerForm?.get('password')?.hasError('minlength')
+        "
+        matTooltip="Password should have minimum 8 characters"
+        matTooltipClass="tooltip-red"
+        matSuffix
+        >error</mat-icon
+      >
+      <mat-icon
+        style="color: green"
+        *ngIf="
+          registerForm?.get('password')?.value !== '' &&
+          !registerForm?.get('password')?.hasError('minlength')
+        "
+        matSuffix
+        >check_circle</mat-icon
+      >
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input
+        matInput
+        placeholder="Re-enter Password*"
+        type="password"
+        formControlName="repassword"
+      />
+      <mat-icon
+        style="color: red"
+        *ngIf="
+          registerForm?.invalid &&
+          registerForm?.errors?.mismatch &&
+          registerForm?.get('password')?.hasError('minLength')
+        "
+        matSuffix
+        >error</mat-icon
+      >
+      <mat-icon
+        style="color: green"
+        *ngIf="
+          registerForm?.get('password')?.value !== '' &&
+          !registerForm?.errors?.mismatch
+        "
+        matSuffix
+        >check_circle</mat-icon
+      >
+    </mat-form-field>
+    <button
+      mat-raised-button
+      class="submit-button"
+      color="primary"
+      [disabled]="registerForm.invalid"
+      type="submit"
+    >
+      Register
+    </button>
+  </form>
+</div>

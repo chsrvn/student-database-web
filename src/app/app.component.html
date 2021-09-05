@@ -1,0 +1,30 @@
+<ion-app>
+  <ion-menu side="start" menuId="first" contentId="menu">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Student Database</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item>Attendance (Coming Soon)</ion-item>
+        <ion-item>Students (Coming Soon)</ion-item>
+        <ion-item>Class (Coming Soon)</ion-item>
+        <ion-item>Marks (Coming Soon)</ion-item>
+        <ion-item>Feedback (Coming Soon)</ion-item>
+        <ion-item routerLink="/login">Login/Register</ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Inbox</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-router-outlet id="menu"></ion-router-outlet>
+  </ion-content>
+</ion-app>

@@ -1,0 +1,13 @@
+
+  <form class="login-form" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Username</ion-label>
+      <ion-input formControlName="username"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Password</ion-label>
+      <ion-input type="password" formControlName="password"></ion-input>
+    </ion-item>
+    <ion-button expand="block" [disabled]="profileForm.invalid" type="submit">Login</ion-button>
+    <ion-button expand="block" (click)="registerUser()">Register</ion-button>
+  </form>

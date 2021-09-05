@@ -1,0 +1,7 @@
+{
+  "name": "student-database",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
