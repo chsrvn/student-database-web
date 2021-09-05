@@ -4,18 +4,17 @@ import { BehaviorSubject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class SpinnerService {
-  loading;
 
   constructor(public loadingController: LoadingController) {}
 
   async start() {
-    this.loading = await this.loadingController.create({
+    const loading = await this.loadingController.create({
       message: 'Please wait...',
     });
-    await this.loading.present();
+    await loading.present();
   }
 
   async stop() {
-    await this.loading.dismiss();
+    await this.loadingController.dismiss();
   }
 }

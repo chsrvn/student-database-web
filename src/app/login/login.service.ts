@@ -2,7 +2,7 @@ import { HttpBackend, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { SpinnerService } from '../core/spinner/spinner.service';
 // import { SpinnerService } from '../core/spinner/spinner.service';
@@ -60,5 +60,19 @@ export class LoginService {
 
   public isLoggedIn(): boolean {
     return !!this.getToken();
+  }
+
+  public validateJWTToken() {
+    const token = this.getToken();
+    return this.httpClient
+      .get(environment.api + 'auth/validate', {
+        headers: { Authorization: `Bearer ${token}` },
+        responseType: 'text',
+      })
+      .pipe(
+        catchError((err) => {
+          return of(false);
+        })
+      );
   }
 }
