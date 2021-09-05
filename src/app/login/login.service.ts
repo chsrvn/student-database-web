@@ -14,6 +14,7 @@ import { ToasterService } from '../core/toaster.service';
 })
 export class LoginService {
   private httpClient: HttpClient;
+
   constructor(
     handler: HttpBackend,
     private router: Router,
@@ -68,5 +69,10 @@ export class LoginService {
           return of(false);
         })
       );
+  }
+
+  public logout() {
+    sessionStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
 }

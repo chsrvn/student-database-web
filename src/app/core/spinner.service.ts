@@ -3,16 +3,27 @@ import { LoadingController } from '@ionic/angular';
 
 @Injectable({ providedIn: 'root' })
 export class SpinnerService {
+  isLoading = false;
+
   constructor(public loadingController: LoadingController) {}
 
   async start() {
-    const loading = await this.loadingController.create({
-      message: 'Please wait...',
-    });
-    await loading.present();
+    this.isLoading = true;
+    return await this.loadingController
+      .create({
+        message: 'Please wait...',
+      })
+      .then((a) => {
+        a.present().then(() => {
+          if (!this.isLoading) {
+            a.dismiss();
+          }
+        });
+      });
   }
 
   async stop() {
-    await this.loadingController.dismiss();
+    this.isLoading = false;
+    return await this.loadingController.dismiss();
   }
 }

@@ -6,12 +6,15 @@
       </ion-toolbar>
     </ion-header>
     <ion-content>
-      <ion-list>
+      <ion-list *ngIf="!!loginService.isLoggedIn()">
         <ion-item>Attendance (Coming Soon)</ion-item>
         <ion-item>Students (Coming Soon)</ion-item>
-        <ion-item>Class (Coming Soon)</ion-item>
+        <ion-item routerLink="/class">Class (Coming Soon)</ion-item>
         <ion-item>Marks (Coming Soon)</ion-item>
         <ion-item>Feedback (Coming Soon)</ion-item>
+        <ion-item button (click)="onLogout()">Logout</ion-item>
+      </ion-list>
+      <ion-list *ngIf="!loginService.isLoggedIn()">
         <ion-item routerLink="/login">Login/Register</ion-item>
       </ion-list>
     </ion-content>

@@ -9,7 +9,7 @@ import {
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { SpinnerService } from '../core/spinner/spinner.service';
+import { SpinnerService } from '../core/spinner.service';
 import { LoginService } from '../login/login.service';
 
 @Injectable({
