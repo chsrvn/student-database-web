@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { LoadingController } from '@ionic/angular';
-import { SpinnerService } from './core/spinner/spinner.service';
 
 @Component({
   selector: 'app-root',

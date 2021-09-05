@@ -1,17 +1,30 @@
-
-  <form class="login-form" [formGroup]="profileForm" (ngSubmit)="onLogin()">
-    <ion-item>
-      <ion-label position="floating">Username</ion-label>
-      <ion-input formControlName="username"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" formControlName="password"></ion-input>
-    </ion-item>
-    <ion-item *ngIf="!isLogin">
-      <ion-label position="floating">Re-enter Password</ion-label>
-      <ion-input type="password" [formControl]="repassword"></ion-input>
-    </ion-item>
-    <ion-button expand="block" [disabled]="profileForm.invalid && !!isLogin" type="submit">Login</ion-button>
-    <ion-button expand="block" (click)="registerUser()">Register</ion-button>
-  </form>
+<form class="login-form" [formGroup]="profileForm" (ngSubmit)="onLogin()">
+  <ion-item>
+    <ion-label position="floating">Username</ion-label>
+    <ion-input formControlName="username"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Password</ion-label>
+    <ion-input type="password" formControlName="password"></ion-input>
+  </ion-item>
+  <ion-item *ngIf="!isLogin">
+    <ion-label position="floating">Re-enter Password</ion-label>
+    <ion-input type="password" [formControl]="repassword"></ion-input>
+  </ion-item>
+  <ion-button
+    expand="block"
+    [disabled]="profileForm.invalid && !!isLogin"
+    type="submit"
+    >Login</ion-button
+  >
+  <ion-button
+    expand="block"
+    [disabled]="
+      !isLogin &&
+      (repassword.invalid ||
+        profileForm.get('password').value !== repassword.value)
+    "
+    (click)="registerUser()"
+    >Register</ion-button
+  >
+</form>

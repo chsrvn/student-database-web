@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class SpinnerService {
-
   constructor(public loadingController: LoadingController) {}
 
   async start() {
