@@ -11,6 +11,13 @@ import { LoginService } from './login.service';
 export class LoginComponent {
   profileForm: FormGroup;
 
+  isLogin = true;
+
+  repassword = new FormControl('', [
+    Validators.required,
+    Validators.minLength(8),
+  ]);
+
   constructor(private loginService: LoginService, private router: Router) {
     this.profileForm = new FormGroup({
       username: new FormControl('', [
@@ -23,15 +30,26 @@ export class LoginComponent {
       ]),
     });
   }
-  onSubmit() {
+  onLogin() {
     const data = this.profileForm.getRawValue();
-    // this.loginService.loginUser(data);
+    if (!this.isLogin) {
+      this.isLogin = !this.isLogin;
+    } else {
+        this.loginService.loginUser(data);
+    }
+    
   }
 
   registerUser() {
-    console.log(this.profileForm);
-    // const data = this.profileForm.getRawValue();
-    // this.loginService.registerUser(data);
-    // this.router.navigate(["register"]);
+    if (!!this.isLogin) {
+      this.isLogin = !this.isLogin;
+    } else {
+      const data = this.profileForm.getRawValue();
+      if (data.password === this.repassword.value) {
+        // this.loginService.registerUser(data);
+      } else {
+        this.repassword.setErrors({ mismatch: true });
+      }
+    }
   }
 }
