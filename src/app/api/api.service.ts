@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { IUserVo } from '../model/IUserVo';
 
 import { UrlService } from './url.service';
 
@@ -9,13 +10,13 @@ import { UrlService } from './url.service';
 export class ApiService {
   constructor(private urlService: UrlService) {}
 
-  // getAllCards(): Observable<ICard[]> {
-  //   return this.urlService.get('card/getAllCards');
-  // }
+  getAccountDetails(): Observable<IUserVo> {
+    return this.urlService.get('user/getAccountDetails');
+  }
 
-  // createNewCard(card: ICard): Observable<ICard> {
-  //   return this.urlService.post('card/create', card);
-  // }
+  updatePassword(user: any): Observable<any> {
+    return this.urlService.post('auth/updatePassword', user);
+  }
 
   
   // getCardDetail(cardId: string): Observable<ICardDetail[]> {
