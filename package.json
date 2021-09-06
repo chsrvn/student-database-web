@@ -6,10 +6,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ionic serve",
-    "build": "ionic build --prod",
+    "build": "npm install -g @ionic/cli && ionic build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "heroku-postbuild": "npm install -g @ionic/cli && ionic build --prod && npm install -g http-server-spa"
   },
   "private": true,
   "dependencies": {
