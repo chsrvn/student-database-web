@@ -5,8 +5,6 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ApiService } from 'src/app/api/api.service';
 import { HeaderService } from 'src/app/core/header.service';
-import { LoginService } from 'src/app/login/login.service';
-import { IUserVo } from 'src/app/model/IUserVo';
 
 @Component({
   selector: 'app-account',
@@ -31,7 +29,7 @@ export class AccountComponent implements OnInit {
     private headerService: HeaderService,
     private route: ActivatedRoute
   ) {
-    this.headerService.setHeader(this.route.snapshot.data['title']);
+    this.headerService.setHeader(this.route.snapshot.data.title);
     this.passwordGroup = new FormGroup({
       oldPassword: new FormControl('', [
         Validators.required,

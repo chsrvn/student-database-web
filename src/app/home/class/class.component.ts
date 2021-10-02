@@ -15,7 +15,7 @@ export class ClassComponent {
     private route: ActivatedRoute,
     public modalController: ModalController
   ) {
-    this.headerService.setHeader(this.route.snapshot.data['title']);
+    this.headerService.setHeader(this.route.snapshot.data.title);
   }
 
   async presentModal() {
