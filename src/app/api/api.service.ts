@@ -3,6 +3,8 @@ import { Observable } from 'rxjs';
 import { IUserVo } from '../model/IUserVo';
 
 import { UrlService } from './url.service';
+import { IClassVo } from '../model/IClassVo';
+import {IStudentVo} from "../model/IStudentVo";
 
 @Injectable({
   providedIn: 'root',
@@ -18,16 +20,29 @@ export class ApiService {
     return this.urlService.post('auth/updatePassword', user);
   }
 
-  
-  // getCardDetail(cardId: string): Observable<ICardDetail[]> {
-  //   return this.urlService.get('cardDetail/' + cardId);
-  // }
+  getClasses(): Observable<IClassVo[]> {
+    return this.urlService.get('class/getAllClasses');
+  }
 
-  // createCardDetail(cardDetail: ICardDetail): Observable<ICardDetail> {
-  //   return this.urlService.post('cardDetail/create', cardDetail);
-  // }
+  createClass(classVo: IClassVo): Observable<IClassVo> {
+    return this.urlService.post('class/create', classVo);
+  }
 
   // updateCardDetail(cardDetail: ICardDetail): Observable<ICardDetail> {
   //   return this.urlService.put('cardDetail/update', cardDetail);
   // }
+
+
+  getAllStudents(): Observable<IStudentVo[]> {
+    return this.urlService.get('student/getAllStudents');
+  }
+
+  getStudentsByClass(classId: string): Observable<IStudentVo[]> {
+    return this.urlService.get('student/getStudents/' + classId);
+  }
+
+  createStudent(studentVo: IStudentVo): Observable<IClassVo> {
+    return this.urlService.post('student/create', studentVo);
+  }
+
 }

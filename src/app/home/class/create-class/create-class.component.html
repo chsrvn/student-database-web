@@ -1,3 +1,12 @@
-<p>
-  create-class works!
-</p>
+<div class="create-class-container">
+  <ion-list style="flex: 1">
+    <ion-list-header class="header">
+      Create Class/Group
+    </ion-list-header>
+    <ion-item>
+      <ion-label>Name: </ion-label>
+      <ion-input [formControl]="classNameControl"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-button (click)="onCreateHandler()" expand="block">Create</ion-button>
+</div>

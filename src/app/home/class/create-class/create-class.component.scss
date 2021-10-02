@@ -1,0 +1,14 @@
+.create-class-container {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  .header {
+    font-size: 22px;
+    font-weight: 700;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+  }
+}

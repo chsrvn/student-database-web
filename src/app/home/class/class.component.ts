@@ -1,21 +1,43 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HeaderService } from 'src/app/core/header.service';
 import { ModalController } from '@ionic/angular';
 import { CreateClassComponent } from './create-class/create-class.component';
+import { ApiService } from '../../api/api.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { IClassVo } from '../../model/IClassVo';
 
 @Component({
   selector: 'app-class',
   templateUrl: './class.component.html',
   styleUrls: ['./class.component.scss'],
 })
-export class ClassComponent {
+export class ClassComponent implements OnInit, OnDestroy {
+  destroy$ = new Subject();
+
+  classes: IClassVo[] = [];
+
   constructor(
     private headerService: HeaderService,
     private route: ActivatedRoute,
-    public modalController: ModalController
+    public modalController: ModalController,
+    private apiService: ApiService
   ) {
     this.headerService.setHeader(this.route.snapshot.data.title);
+  }
+
+  ngOnInit(): void {
+    this.getClassData();
+  }
+
+  getClassData() {
+    this.apiService
+      .getClasses()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((response) => {
+        this.classes = response;
+      });
   }
 
   async presentModal() {
@@ -23,6 +45,18 @@ export class ClassComponent {
       component: CreateClassComponent,
       cssClass: 'my-custom-class',
     });
-    return await modal.present();
+    await modal.present();
+    await modal.onDidDismiss().then((result) => {
+      console.log(result);
+      this.apiService
+        .createClass({ name: result.data })
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((_) => this.getClassData());
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.unsubscribe();
   }
 }

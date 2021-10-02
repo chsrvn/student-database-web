@@ -1,4 +1,19 @@
-<ion-content>
+<ion-content fullscreen>
+  <ion-list>
+    <ng-container *ngFor="let group of classes">
+      <ion-item>
+        <ion-avatar slot="start">
+          <ion-icon name="people-outline"></ion-icon>
+        </ion-avatar>
+        <ion-label>
+          <h2>Name: {{ group.name }}</h2>
+          <h3>No. of Students: 1</h3>
+          <p>Description</p>
+        </ion-label>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="presentModal()">
       <ion-icon name="add-outline"></ion-icon>
