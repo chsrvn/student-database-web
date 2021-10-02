@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderService } from 'src/app/core/header.service';
 import { ModalController } from '@ionic/angular';
 import { CreateClassComponent } from './create-class/create-class.component';
@@ -22,7 +22,8 @@ export class ClassComponent implements OnInit, OnDestroy {
     private headerService: HeaderService,
     private route: ActivatedRoute,
     public modalController: ModalController,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private router: Router
   ) {
     this.headerService.setHeader(this.route.snapshot.data.title);
   }
@@ -58,5 +59,9 @@ export class ClassComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.unsubscribe();
+  }
+
+  openClass(group: IClassVo) {
+    this.router.navigate(['students', group.id]);
   }
 }

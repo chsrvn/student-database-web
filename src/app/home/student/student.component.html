@@ -1,12 +1,12 @@
 <ion-content fullscreen>
   <ion-list>
-    <ng-container *ngFor="let group of classes">
-      <ion-item (click)="openClass(group)">
+    <ng-container *ngFor="let student of students">
+      <ion-item (click)="presentModal(student, true)">
         <ion-avatar slot="start">
-          <ion-icon style="zoom:2" name="people-outline"></ion-icon>
+          <ion-icon style="zoom:2" name="person-outline"></ion-icon>
         </ion-avatar>
         <ion-label>
-          <h2>Name: {{ group.name }}</h2>
+          <h2>Name: {{ student.firstName }} {{ student.lastName}}</h2>
           <h3>No. of Students: 1</h3>
           <p>Description</p>
         </ion-label>
@@ -15,7 +15,7 @@
   </ion-list>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="presentModal()">
+    <ion-fab-button (click)="presentModal({}, false)">
       <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>

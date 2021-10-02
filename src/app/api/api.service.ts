@@ -4,7 +4,7 @@ import { IUserVo } from '../model/IUserVo';
 
 import { UrlService } from './url.service';
 import { IClassVo } from '../model/IClassVo';
-import {IStudentVo} from "../model/IStudentVo";
+import { IStudentVo } from '../model/IStudentVo';
 
 @Injectable({
   providedIn: 'root',
@@ -28,9 +28,6 @@ export class ApiService {
     return this.urlService.post('class/create', classVo);
   }
 
-  // updateCardDetail(cardDetail: ICardDetail): Observable<ICardDetail> {
-  //   return this.urlService.put('cardDetail/update', cardDetail);
-  // }
 
 
   getAllStudents(): Observable<IStudentVo[]> {
@@ -38,11 +35,14 @@ export class ApiService {
   }
 
   getStudentsByClass(classId: string): Observable<IStudentVo[]> {
-    return this.urlService.get('student/getStudents/' + classId);
+    return this.urlService.get('student/getAllStudents/' + classId);
   }
 
-  createStudent(studentVo: IStudentVo): Observable<IClassVo> {
-    return this.urlService.post('student/create', studentVo);
+  addStudent(studentVo: IStudentVo): Observable<IStudentVo> {
+    return this.urlService.post('student/add', studentVo);
   }
 
+  updateStudent(studentVo: IStudentVo): Observable<IStudentVo> {
+    return this.urlService.put('student/update', studentVo);
+  }
 }

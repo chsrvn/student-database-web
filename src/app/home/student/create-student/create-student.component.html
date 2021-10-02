@@ -1,0 +1,36 @@
+<div class="create-class-container">
+  <ion-list style="flex: 1">
+    <ion-list-header class="header">
+      {{ isUpdate ? 'Update' : 'Add New'}} Student
+    </ion-list-header>
+    <form [formGroup]="studentGroup">
+      <ion-item>
+        <ion-label>First Name:</ion-label>
+        <ion-input formControlName="firstName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Last Name:</ion-label>
+        <ion-input formControlName="lastName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Email:</ion-label>
+        <ion-input email formControlName="emailId"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Roll Number:</ion-label>
+        <ion-input formControlName="rollNo"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Class</ion-label>
+        <ion-select placeholder="Select One" formControlName="classId">
+          <ng-container *ngFor="let classVo of classList">
+            <ion-select-option [value]="classVo.id">{{ classVo.name }}</ion-select-option>
+          </ng-container>
+        </ion-select>
+      </ion-item>
+
+    </form>
+  </ion-list>
+  <ion-button [disabled]="studentGroup.invalid" (click)="onCreateHandler()"
+              expand="block">{{ isUpdate ? 'Update' : 'Add'}}</ion-button>
+</div>
