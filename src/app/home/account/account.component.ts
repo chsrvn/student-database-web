@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ApiService } from 'src/app/api/api.service';
+import { HeaderService } from 'src/app/core/header.service';
 import { LoginService } from 'src/app/login/login.service';
 import { IUserVo } from 'src/app/model/IUserVo';
 
@@ -23,10 +25,13 @@ export class AccountComponent implements OnInit {
     Validators.minLength(6),
   ]);
   destroy$ = new Subject();
+
   constructor(
     private apiService: ApiService,
-    private loginService: LoginService
+    private headerService: HeaderService,
+    private route: ActivatedRoute
   ) {
+    this.headerService.setHeader(this.route.snapshot.data['title']);
     this.passwordGroup = new FormGroup({
       oldPassword: new FormControl('', [
         Validators.required,

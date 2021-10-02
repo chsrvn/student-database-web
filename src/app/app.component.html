@@ -7,25 +7,29 @@
     </ion-header>
     <ion-content>
       <ion-list *ngIf="!!loginService.isLoggedIn()">
-        <ion-item>Attendance (Coming Soon)</ion-item>
-        <ion-item>Students (Coming Soon)</ion-item>
-        <ion-item routerLink="/class">Class (Coming Soon)</ion-item>
-        <ion-item>Marks (Coming Soon)</ion-item>
-        <ion-item>Feedback (Coming Soon)</ion-item>
-        <ion-item routerLink="/account">Account</ion-item>
-        <ion-item button (click)="onLogout()">Logout</ion-item>
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink="">Home (Coming Soon)</ion-item>
+          <ion-item>Attendance (Coming Soon)</ion-item>
+          <ion-item>Students (Coming Soon)</ion-item>
+          <ion-item routerLink="/class">Class (Coming Soon)</ion-item>
+          <ion-item>Marks (Coming Soon)</ion-item>
+          <ion-item>Feedback (Coming Soon)</ion-item>
+          <ion-item routerLink="/account">Account</ion-item>
+          <ion-item button (click)="onLogout()">Logout</ion-item>
+        </ion-menu-toggle>
       </ion-list>
       <ion-list *ngIf="!loginService.isLoggedIn()">
         <ion-item routerLink="/login">Login/Register</ion-item>
       </ion-list>
     </ion-content>
   </ion-menu>
+
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <ion-title>Inbox</ion-title>
+      <ion-title>{{ title }}</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content>

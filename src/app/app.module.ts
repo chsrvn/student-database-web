@@ -13,6 +13,7 @@ import { AccountComponent } from './home/account/account.component';
 import { ClassComponent } from './home/class/class.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { CreateClassComponent } from './home/class/create-class/create-class.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { LoginComponent } from './login/login.component';
     HomeComponent,
     ClassComponent,
     AccountComponent,
+    CreateClassComponent,
   ],
   entryComponents: [],
   imports: [

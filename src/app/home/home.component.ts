@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { HeaderService } from '../core/header.service';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +10,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-
-  // version = environment.Version;
-
-  logout() {
-    // console.log(this.version);
+  constructor(private headerService: HeaderService, private route: ActivatedRoute) {
+    this.headerService.setHeader(this.route.snapshot.data['title']);
   }
 }

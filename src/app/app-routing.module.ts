@@ -10,16 +10,19 @@ const routes: Routes = [
   {
     path: '',
     canActivate: [RouteGuard],
+    data: {title: 'Home'},
     component: HomeComponent,
   },
   {
     path: 'class',
     canActivate: [RouteGuard],
+    data: {title: 'Class'},
     component: ClassComponent,
   },
   {
     path: 'account',
     canActivate: [RouteGuard],
+    data: {title: 'My Account'},
     component: AccountComponent,
   },
   {
