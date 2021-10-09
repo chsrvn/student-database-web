@@ -16,6 +16,10 @@ import { LoginComponent } from './login/login.component';
 import { CreateClassComponent } from './home/class/create-class/create-class.component';
 import { StudentComponent } from './home/student/student.component';
 import { CreateStudentComponent } from './home/student/create-student/create-student.component';
+import { MarksComponent } from './home/marks/marks.component';
+import { SubjectComponent } from './home/marks/subject/subject.component';
+import { CreateSubjectComponent } from './home/marks/subject/create-subject/create-subject.component';
+import { EnterMarksComponent } from './home/marks/enter-marks/enter-marks.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +31,10 @@ import { CreateStudentComponent } from './home/student/create-student/create-stu
     CreateClassComponent,
     StudentComponent,
     CreateStudentComponent,
+    MarksComponent,
+    SubjectComponent,
+    CreateSubjectComponent,
+    EnterMarksComponent,
   ],
   entryComponents: [],
   imports: [

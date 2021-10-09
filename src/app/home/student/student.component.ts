@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HeaderService } from 'src/app/core/header.service';
 import { ModalController } from '@ionic/angular';
@@ -14,7 +14,7 @@ import { IClassVo } from '../../model/IClassVo';
   templateUrl: './student.component.html',
   styleUrls: ['./student.component.scss'],
 })
-export class StudentComponent implements OnInit, OnDestroy {
+export class StudentComponent {
   destroy$ = new Subject();
 
   students: IStudentVo[] = [];
@@ -31,7 +31,7 @@ export class StudentComponent implements OnInit, OnDestroy {
     this.headerService.setHeader(this.route.snapshot.data.title);
   }
 
-  ngOnInit(): void {
+  ionViewWillEnter() {
     this.getStudentData();
     this.getClassData();
   }
@@ -97,7 +97,7 @@ export class StudentComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
+  ionViewWillLeave() {
     this.destroy$.next();
     this.destroy$.unsubscribe();
   }

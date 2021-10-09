@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderService } from 'src/app/core/header.service';
 import { ModalController } from '@ionic/angular';
@@ -13,7 +13,7 @@ import { IClassVo } from '../../model/IClassVo';
   templateUrl: './class.component.html',
   styleUrls: ['./class.component.scss'],
 })
-export class ClassComponent implements OnInit, OnDestroy {
+export class ClassComponent {
   destroy$ = new Subject();
 
   classes: IClassVo[] = [];
@@ -28,7 +28,7 @@ export class ClassComponent implements OnInit, OnDestroy {
     this.headerService.setHeader(this.route.snapshot.data.title);
   }
 
-  ngOnInit(): void {
+  ionViewWillEnter(): void {
     this.getClassData();
   }
 
@@ -48,7 +48,6 @@ export class ClassComponent implements OnInit, OnDestroy {
     });
     await modal.present();
     await modal.onDidDismiss().then((result) => {
-      console.log(result);
       this.apiService
         .createClass({ name: result.data })
         .pipe(takeUntil(this.destroy$))
@@ -56,7 +55,7 @@ export class ClassComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
+  ionViewWillLeave(): void {
     this.destroy$.next();
     this.destroy$.unsubscribe();
   }
