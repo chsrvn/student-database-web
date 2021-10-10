@@ -54,11 +54,23 @@ export class ApiService {
     return this.urlService.post('subject/add', subjectVo);
   }
 
+  updateSubject(subjectVo: ISubjectVo) {
+    return this.urlService.put('subject/update', subjectVo);
+  }
+
   getAllMarksByClassIdAndSubjectId(classId: string, subjectId: string) {
     return this.urlService.get(`marks/getAllMarks/${classId}/${subjectId}`);
   }
 
   saveOrUpdateScores(marks: IMarksVo[]) {
     return this.urlService.post('marks/saveOrUpdate', marks);
+  }
+
+  validateClassId(classId: string) {
+    return this.urlService.get('class/findById/' + classId);
+  }
+
+  validateSubjectId(subjectId: string) {
+    return this.urlService.get('subject/findById/' + subjectId);
   }
 }

@@ -13,24 +13,26 @@ import { IMarksVo } from '../../../model/IMarksVo';
   styleUrls: ['./enter-marks.component.scss'],
 })
 export class EnterMarksComponent {
-  destroy$ = new Subject();
+  destroy$: Subject<void>;
 
-  students: IStudentVo[] = [];
+  students: IStudentVo[];
   classId = null;
   subjectId = null;
-  marks: IMarksVo[] = [];
+  marks: IMarksVo[];
 
   constructor(
     private headerService: HeaderService,
     private route: ActivatedRoute,
     private apiService: ApiService
-  ) {
+  ) {}
+
+  ionViewWillEnter() {
+    this.destroy$ = new Subject();
+    this.students = [];
+    this.marks = [];
     this.classId = this.route.snapshot.params.classId;
     this.subjectId = this.route.snapshot.params.subjectId;
     this.headerService.setHeader(this.route.snapshot.data.title);
-  }
-
-  ionViewWillEnter() {
     this.getStudentAndMarksData();
   }
 

@@ -14,9 +14,9 @@ import { ISubjectVo } from '../../../model/ISubjectVo';
   styleUrls: ['./subject.component.scss'],
 })
 export class SubjectComponent {
-  destroy$ = new Subject();
+  destroy$: Subject<void>;
 
-  subjects: ISubjectVo[] = [];
+  subjects: ISubjectVo[];
   classId = null;
 
   constructor(
@@ -26,11 +26,14 @@ export class SubjectComponent {
     private apiService: ApiService,
     private router: Router
   ) {
-    this.classId = this.route.snapshot.params.classId;
-    this.headerService.setHeader(this.route.snapshot.data.title);
+
   }
 
   ionViewWillEnter() {
+    this.destroy$ = new Subject();
+    this.subjects = [];
+    this.classId = this.route.snapshot.params.classId;
+    this.headerService.setHeader(this.route.snapshot.data.title);
     this.getSubjectData();
   }
 
@@ -68,11 +71,11 @@ export class SubjectComponent {
             .pipe(takeUntil(this.destroy$))
             .subscribe((_) => this.getSubjectData());
         } else {
-          // subjectVo = { ...subjectVo, ...subject };
-          // this.apiService
-          //   .up(subjectVo)
-          //   .pipe(takeUntil(this.destroy$))
-          //   .subscribe((_) => this.getSubjectData());
+          subjectVo = { ...subjectVo, ...subject };
+          this.apiService
+            .updateSubject(subjectVo)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((_) => this.getSubjectData());
         }
       }
     });

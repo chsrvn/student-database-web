@@ -13,9 +13,9 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./marks.component.scss'],
 })
 export class MarksComponent {
-  destroy$ = new Subject();
+  destroy$: Subject<void>;
 
-  classes: IClassVo[] = [];
+  classes: IClassVo[];
 
   constructor(
     private headerService: HeaderService,
@@ -23,11 +23,12 @@ export class MarksComponent {
     public modalController: ModalController,
     private apiService: ApiService,
     private router: Router
-  ) {
-    this.headerService.setHeader(this.route.snapshot.data.title);
-  }
+  ) {}
 
   ionViewWillEnter(): void {
+    this.destroy$ = new Subject();
+    this.classes = [];
+    this.headerService.setHeader(this.route.snapshot.data.title);
     this.getClassData();
   }
 

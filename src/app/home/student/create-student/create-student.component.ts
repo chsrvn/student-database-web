@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { IClassVo } from '../../../model/IClassVo';
@@ -9,7 +9,7 @@ import { IStudentVo } from '../../../model/IStudentVo';
   templateUrl: './create-student.component.html',
   styleUrls: ['./create-student.component.scss'],
 })
-export class CreateStudentComponent {
+export class CreateStudentComponent implements OnInit {
   @Input() classList: IClassVo[];
   @Input() student: IStudentVo;
   @Input() classId: string;
@@ -19,7 +19,7 @@ export class CreateStudentComponent {
 
   constructor(public modalController: ModalController) {}
 
-  ionViewWillEnter(): void {
+  ngOnInit(): void {
     this.studentGroup = new FormGroup({
       firstName: new FormControl(this.student.firstName, Validators.required),
       lastName: new FormControl(this.student.lastName, Validators.required),

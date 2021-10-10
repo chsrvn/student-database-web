@@ -9,6 +9,7 @@ import { StudentComponent } from './home/student/student.component';
 import { MarksComponent } from './home/marks/marks.component';
 import { SubjectComponent } from './home/marks/subject/subject.component';
 import { EnterMarksComponent } from './home/marks/enter-marks/enter-marks.component';
+import { UrlValidateRouteGuard } from './api/url-validate-route-guard';
 
 const routes: Routes = [
   {
@@ -36,13 +37,13 @@ const routes: Routes = [
       },
       {
         path: ':classId/subjects',
-        canActivate: [RouteGuard],
+        canActivate: [RouteGuard, UrlValidateRouteGuard],
         data: { title: 'Marks > Subjects' },
         component: SubjectComponent,
       },
       {
         path: ':classId/subjects/:subjectId',
-        canActivate: [RouteGuard],
+        canActivate: [RouteGuard, UrlValidateRouteGuard],
         data: { title: 'Marks > Subjects' },
         component: EnterMarksComponent,
       },

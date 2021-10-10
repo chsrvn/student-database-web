@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { IClassVo } from '../../../../model/IClassVo';
@@ -9,7 +9,7 @@ import { ISubjectVo } from '../../../../model/ISubjectVo';
   templateUrl: './create-subject.component.html',
   styleUrls: ['./create-subject.component.scss'],
 })
-export class CreateSubjectComponent {
+export class CreateSubjectComponent implements OnInit {
   @Input() classList: IClassVo[];
   @Input() subject: ISubjectVo;
   @Input() classId: string;
@@ -19,7 +19,7 @@ export class CreateSubjectComponent {
 
   constructor(public modalController: ModalController) {}
 
-  ionViewWillEnter(): void {
+  ngOnInit(): void {
     this.subjectNameControl = new FormControl(
       this.subject.name,
       Validators.required

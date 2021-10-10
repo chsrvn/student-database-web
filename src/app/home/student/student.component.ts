@@ -15,10 +15,10 @@ import { IClassVo } from '../../model/IClassVo';
   styleUrls: ['./student.component.scss'],
 })
 export class StudentComponent {
-  destroy$ = new Subject();
+  destroy$: Subject<void>;
 
-  students: IStudentVo[] = [];
-  classList: IClassVo[] = [];
+  students: IStudentVo[];
+  classList: IClassVo[];
   classId = null;
 
   constructor(
@@ -32,6 +32,9 @@ export class StudentComponent {
   }
 
   ionViewWillEnter() {
+    this.students = [];
+    this.classList = [];
+    this.destroy$ = new Subject();
     this.getStudentData();
     this.getClassData();
   }

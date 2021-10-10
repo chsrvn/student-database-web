@@ -27,7 +27,7 @@ export class CustomHttpInterceptor implements HttpInterceptor {
     const token = this.loginService.getToken();
     this.spinnerService.start();
     if (!!token) {
-      req = req.clone({ setHeaders: { Authorization: `Bearer ${token}` } });
+      req = req.clone({ setHeaders: { authorization: `Bearer ${token}` } });
     }
     return next.handle(req).pipe(
       tap(

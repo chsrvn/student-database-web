@@ -14,9 +14,9 @@ import { IClassVo } from '../../model/IClassVo';
   styleUrls: ['./class.component.scss'],
 })
 export class ClassComponent {
-  destroy$ = new Subject();
+  destroy$: Subject<void>;
 
-  classes: IClassVo[] = [];
+  classes: IClassVo[];
 
   constructor(
     private headerService: HeaderService,
@@ -24,11 +24,12 @@ export class ClassComponent {
     public modalController: ModalController,
     private apiService: ApiService,
     private router: Router
-  ) {
-    this.headerService.setHeader(this.route.snapshot.data.title);
-  }
+  ) {}
 
   ionViewWillEnter(): void {
+    this.destroy$ = new Subject();
+    this.classes = [];
+    this.headerService.setHeader(this.route.snapshot.data.title);
     this.getClassData();
   }
 
@@ -48,10 +49,12 @@ export class ClassComponent {
     });
     await modal.present();
     await modal.onDidDismiss().then((result) => {
-      this.apiService
-        .createClass({ name: result.data })
-        .pipe(takeUntil(this.destroy$))
-        .subscribe((_) => this.getClassData());
+      if (!!result && !!result.data) {
+        this.apiService
+          .createClass({ name: result.data })
+          .pipe(takeUntil(this.destroy$))
+          .subscribe((_) => this.getClassData());
+      }
     });
   }
 
