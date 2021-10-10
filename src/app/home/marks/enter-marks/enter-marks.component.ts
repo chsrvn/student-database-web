@@ -4,7 +4,8 @@ import { IStudentVo } from '../../../model/IStudentVo';
 import { HeaderService } from '../../../core/header.service';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../../api/api.service';
-import { takeUntil } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
+import { IMarksVo } from '../../../model/IMarksVo';
 
 @Component({
   selector: 'app-enter-marks',
@@ -17,6 +18,7 @@ export class EnterMarksComponent {
   students: IStudentVo[] = [];
   classId = null;
   subjectId = null;
+  marks: IMarksVo[] = [];
 
   constructor(
     private headerService: HeaderService,
@@ -29,21 +31,63 @@ export class EnterMarksComponent {
   }
 
   ionViewWillEnter() {
-    this.getStudentData();
+    this.getStudentAndMarksData();
   }
 
-  getStudentData() {
+  getStudentAndMarksData() {
     if (this.classId) {
       this.apiService
         .getStudentsByClass(this.classId)
-        .pipe(takeUntil(this.destroy$))
+        .pipe(
+          takeUntil(this.destroy$),
+          switchMap((response) => {
+            this.students = response;
+            return this.apiService.getAllMarksByClassIdAndSubjectId(
+              this.classId,
+              this.subjectId
+            );
+          })
+        )
         .subscribe((response) => {
-          this.students = response;
+          this.marks = response;
         });
     }
   }
 
-  addOrUpdateMarks(student: IStudentVo) {}
+  addOrUpdateMarks(event, student: IStudentVo) {
+    const studentMark = this.marks.find(
+      (element) => element.studentId === student.id
+    );
+    const score = event.target.value;
+    if (!!studentMark) {
+      studentMark.marks = score;
+    } else {
+      this.marks.push({
+        marks: score,
+        studentId: student.id,
+        subjectId: this.subjectId,
+        classId: student.classId,
+      });
+    }
+  }
+
+  getScore(student: IStudentVo) {
+    const studentScore = this.marks.find(
+      (score) => score.studentId === student.id
+    );
+    return studentScore ? studentScore.marks : '';
+  }
+
+  saveOrUpdateScores() {
+    if (this.marks.length > 0) {
+      this.apiService
+        .saveOrUpdateScores(this.marks)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((_) => {
+          this.getStudentAndMarksData();
+        });
+    }
+  }
 
   ionViewWillLeave() {
     this.destroy$.next();

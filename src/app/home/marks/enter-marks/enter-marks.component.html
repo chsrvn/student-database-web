@@ -1,14 +1,22 @@
 <ion-content fullscreen>
+  <div style="display: flex; justify-content: center">
+    <ion-button (click)="saveOrUpdateScores()">
+      <ion-icon name="save-outline"></ion-icon>
+      <ion-label>Save</ion-label>
+    </ion-button>
+    <ion-button (click)="getStudentAndMarksData()">
+      <ion-icon name="refresh-outline"></ion-icon>
+      <ion-label>Reset</ion-label>
+    </ion-button>
+  </div>
   <ion-list>
     <ng-container *ngFor="let student of students">
       <ion-item>
-        <ion-avatar slot="start">
-          <ion-icon style="zoom:2" name="person-outline"></ion-icon>
-        </ion-avatar>
-        <ion-label>
-          <h2>Name: {{ student.firstName }} {{ student.lastName}}</h2>
+        <ion-label style="flex: 1">
+          <h2>{{ student.firstName }} {{ student.lastName}}</h2>
+          <p>{{ student.rollNo }}</p>
         </ion-label>
-        <ion-input (ionBlur)="addOrUpdateMarks(student)" placeholder="Enter Marks"></ion-input>
+        <ion-input type="number" (ionBlur)="addOrUpdateMarks($event, student)" [value]="getScore(student)" placeholder="Enter Marks"></ion-input>
       </ion-item>
     </ng-container>
   </ion-list>

@@ -6,6 +6,7 @@ import { UrlService } from './url.service';
 import { IClassVo } from '../model/IClassVo';
 import { IStudentVo } from '../model/IStudentVo';
 import { ISubjectVo } from '../model/ISubjectVo';
+import { IMarksVo } from '../model/IMarksVo';
 
 @Injectable({
   providedIn: 'root',
@@ -51,5 +52,13 @@ export class ApiService {
 
   createSubject(subjectVo: ISubjectVo) {
     return this.urlService.post('subject/add', subjectVo);
+  }
+
+  getAllMarksByClassIdAndSubjectId(classId: string, subjectId: string) {
+    return this.urlService.get(`marks/getAllMarks/${classId}/${subjectId}`);
+  }
+
+  saveOrUpdateScores(marks: IMarksVo[]) {
+    return this.urlService.post('marks/saveOrUpdate', marks);
   }
 }
