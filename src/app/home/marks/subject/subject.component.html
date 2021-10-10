@@ -1,0 +1,24 @@
+<ion-content fullscreen>
+  <ion-list>
+    <ng-container *ngFor="let subject of subjects">
+      <ion-item>
+        <ion-avatar slot="start">
+          <ion-icon style="zoom:2" name="person-outline"></ion-icon>
+        </ion-avatar>
+        <ion-label (click)="openSubject(subject)">
+          <h2>Name: {{ subject.name }}</h2>
+          <h3>No. of Students: 1</h3>
+          <p>Description</p>
+        </ion-label>
+        <ion-icon (click)="presentModal(subject, true)" name="create-outline"></ion-icon>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="presentModal({}, false)">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+

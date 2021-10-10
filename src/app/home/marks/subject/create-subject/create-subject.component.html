@@ -1,0 +1,13 @@
+<div class="create-class-container">
+  <ion-list style="flex: 1">
+    <ion-list-header class="header">
+      {{ isUpdate ? 'Update' : 'Add New'}} Subject
+    </ion-list-header>
+    <ion-item>
+      <ion-label>Name:</ion-label>
+      <ion-input [formControl]="subjectNameControl"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-button [disabled]="subjectNameControl.invalid" (click)="onCreateHandler()"
+              expand="block">{{ isUpdate ? 'Update' : 'Add'}}</ion-button>
+</div>
